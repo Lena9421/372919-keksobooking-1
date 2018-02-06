@@ -85,7 +85,7 @@
   <div class="notice">
     <h2 class="notice__title">Ваше объявление</h2>
 
-    <form class="notice__form notice__form--disabled" method="post" enctype="multipart/form-data" autocomplete="off">
+    <form class="notice__form notice__form--disabled" method="post" enctype="multipart/form-data" action="https://js.dump.academy/keksobooking" autocomplete="off">
       <fieldset class="notice__header">
         <legend>Ваша фотография (для карты)</legend>
         <div class="notice__photo">
@@ -100,17 +100,17 @@
         </div>
       </fieldset>
 
-      <fieldset class="form__element form__element--wide">
+      <fieldset class="form__element form__element--wide" disabled>
         <label for="title">Заголовок объявления</label>
-        <input id="title" name="title" type="text" placeholder="Милая, уютная квартирка в центре Токио">
+        <input id="title" name="title" type="text" placeholder="Милая, уютная квартирка в центре Токио" minlength="30" maxlength="100" required>
       </fieldset>
 
-      <fieldset class="form__element form__element--wide">
+      <fieldset class="form__element form__element--wide" disabled>
         <label for="address">Адрес</label>
         <input id="address" name="address" type="text">
       </fieldset>
 
-      <fieldset class="form__element">
+      <fieldset class="form__element" disabled>
         <label for="type">Тип жилья</label>
         <select id="type" name="type">
           <option value="flat" selected>Квартира</option>
@@ -120,12 +120,12 @@
         </select>
       </fieldset>
 
-      <fieldset class="form__element">
+      <fieldset class="form__element" disabled>
         <label for="price">Цена за ночь, руб.</label>
-        <input id="price" name="price" type="number" placeholder="5000">
+        <input id="price" name="price" type="number" placeholder="1000" min="0" max="1000000" required>
       </fieldset>
 
-      <fieldset class="form__element">
+      <fieldset class="form__element" disabled>
         <label for="timein">Время заезда и выезда</label>
         <select id="timein" name="timein">
           <option value="12:00" selected>После 12</option>
@@ -139,7 +139,7 @@
         </select>
       </fieldset>
 
-      <fieldset class="form__element">
+      <fieldset class="form__element" disabled>
         <label for="room_number">Кол-во комнат</label>
         <select id="room_number" name="rooms">
           <option value="1" selected>1 комната</option>
@@ -149,7 +149,7 @@
         </select>
       </fieldset>
 
-      <fieldset class="form__element">
+      <fieldset class="form__element" disabled>
         <label for="capacity">Количество мест</label>
         <select id="capacity" name="capacity">
           <option value="3" selected>для 3 гостей</option>
@@ -159,7 +159,7 @@
         </select>
       </fieldset>
 
-      <fieldset class="form__element features form__element--wide">
+      <fieldset class="form__element features form__element--wide" disabled>
         <legend>Удобства: Wi-Fi, кухня, парковка, стиралка, лифт, кондиционер</legend>
 
         <input type="checkbox" name="features" value="wifi" id="feature-wifi">
@@ -186,7 +186,7 @@
         <textarea id="description" name="description" placeholder="Здесь расскажите о том, какое ваше жилье замечательное и вообще"></textarea>
       </fieldset>
 
-      <fieldset class="form__element form__element--wide">
+      <fieldset class="form__element form__element--wide" disabled>
         <label>Фотографии жилья</label>
         <div class="form__photo-container">
           <div class="upload">
@@ -196,7 +196,7 @@
         </div>
       </fieldset>
 
-      <fieldset class="form__element form__element--submit">
+      <fieldset class="form__element form__element--submit" disabled>
         <button class="form__submit" type="submit">Опубликовать</button>
         или <button class="form__reset" type="reset">очистить</button>
       </fieldset>
@@ -244,6 +244,11 @@
 
   <button style="left: 200px; top: 400px;" class="map__pin"><img src="img/avatars/user07.png" width="40" height="40" draggable="false"></button>
 </template>
-
+<script src="js/utils.js"></script>
+<script src="js/data.js"></script>
+<script src="js/pin.js"></script>
+<script src="js/card.js"></script>
+<script src="js/map.js"></script>
+<script src="js/form.js"></script>
 </body>
 </html>
