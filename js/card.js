@@ -63,14 +63,10 @@
     popUpClose.addEventListener('keydown', onCloseEnter);
     return offerCard;
   };
-  // результат вызова getCard вставляем в блок map перед классом '.map__filters-container'
-  var showCard = function (offer) {
-    removeCard();
-    window.map.insertElement(getCard(offer)); // вызываем функцию insertElement
-  };
   document.addEventListener('keydown', keyDownEscape);
 
   window.card = {
-    show: showCard
+    remove: removeCard,
+    get: getCard
   };
 })();

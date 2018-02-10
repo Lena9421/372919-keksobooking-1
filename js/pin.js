@@ -17,7 +17,7 @@
     removeActiveClass();
     evt.currentTarget.classList.add('map__pin--active'); // иначе добавляем класс
     // вызываем функцию отрисовки карточки
-    window.card.show(offer);
+    window.showCard.show(offer);
   };
   var removeActiveClass = function () {
     var activePin = document.querySelector('.map__pin--active');
