@@ -3,7 +3,7 @@
   var noticeForm = document.querySelector('.notice__form');
   var formElements = noticeForm.querySelectorAll('.form__element');
   var checkinTime = document.querySelector('#timein');
-  var checkoutTime= document.querySelector('#timeout');
+  var checkoutTime = document.querySelector('#timeout');
   var apartmentType = document.getElementById('type');
   var pricePerNight = document.getElementById('price');
   var numberOfRooms = document.querySelector('#room_number');
@@ -23,17 +23,9 @@
     '3': ['1', '2', '3'],
     '100': ['0']
   };
-
-  var equateInOutTime = function () {
-    checkoutTime.value = checkinTime.value;
-  };
-  var equateOutInTime = function () {
-    checkinTime.value = checkoutTime.value;
-  };
-
-  var syncTypeAndMinPrice = function () {
-    pricePerNight.min = typeToPrice[apartmentType.value];
-  };
+  // var syncTypeAndMinPrice = function () {
+  //   pricePerNight.min = typeToPrice[apartmentType.value];
+  // };
 
   var syncRoomAndGuests = function () {
     var capacityValues = roomToGuest[numberOfRooms.value];
@@ -50,12 +42,22 @@
   };
   syncRoomAndGuests();
   numberOfRooms.addEventListener('change', syncRoomAndGuests);
-  apartmentType.addEventListener('change', syncTypeAndMinPrice);
-  checkinTime.addEventListener('change', equateInOutTime);
-  checkoutTime.addEventListener('change', equateOutInTime);
 
-  // window.synchronizeFields(checkinTime, checkoutTime, ['12', '13', '14'], ['12', '13', '14'], syncValues);
-
+  var syncValues = function (element, elementValue) {
+    element.value = elementValue;
+  };
+  checkinTime.addEventListener('change', function () {
+    window.synchronizeFields(checkinTime, checkoutTime, ['12:00', '13:00', '14:00'], ['12:00', '13:00', '14:00'], syncValues);
+  });
+  checkoutTime.addEventListener('change', function () {
+    window.synchronizeFields(checkoutTime, checkinTime, ['12:00', '13:00', '14:00'], ['12:00', '13:00', '14:00'], syncValues);
+  });
+  var syncValueWithMin = function (element, elementValue) {
+    element.min = elementValue;
+  };
+  apartmentType.addEventListener('change', function () {
+    window.synchronizeFields(apartmentType, pricePerNight, ['apartment', 'bungalo', 'palace'], [1000, 0, 10000], syncValueWithMin);
+  });
   noticeForm.addEventListener('invalid', function (evt) {
     var invalidField = evt.target;
     invalidField.style.borderColor = 'red';

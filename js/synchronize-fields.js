@@ -1,12 +1,11 @@
 'use strict';
 (function () {
-  window.syncValues = function (element, value) {
-    element.value = value;
-  };
   window.synchronizeFields = function (firstField, secondField, firstValues, secondValues, callback) {
+    var fieldValue = firstField.value;
+    var index = firstValues.indexOf(fieldValue);
 
-  };
-  window.syncValueWithMin = function (element, value) {
-    element.min = value;
+    if (typeof callback === 'function') {
+      callback(secondField, secondValues[index]);
+    }
   };
 })();
