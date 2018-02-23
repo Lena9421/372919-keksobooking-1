@@ -14,16 +14,29 @@
   };
   var allOffers = getOffersArray(OFFERS_COUNT);
 
-  var addPinsToMap = function (array) {
-    var fragment = document.createDocumentFragment();
-    for (var i = 0; i < array.length; i++) {
-      fragment.appendChild(window.pin.generate(allOffers[i]));
-    }
-    mapPins.appendChild(fragment);
-  };
+  // var addPinsToMap = function (array) {
+  //   var fragment = document.createDocumentFragment();
+  //   for (var i = 0; i < array.length; i++) {
+  //     fragment.appendChild(window.pin.generate(allOffers[i]));
+  //   }
+  //   mapPins.appendChild(fragment);
+  // };
+
+
+
   var onMainPinMouseUp = function () {
     map.classList.remove('map--faded');
-    addPinsToMap(allOffers);
+    // addPinsToMap(allOffers);
+
+    window.upLoad(function (array) {
+      var fragment = document.createDocumentFragment();
+      for (var i = 0; i < array.length; i++) {
+        fragment.appendChild(window.pin.generate(allOffers[i]));
+      }
+      mapPins.appendChild(fragment);
+    });
+      // onError);
+
     window.form.activate();
   };
   var filtersContainer = document.querySelector('.map__filters-container');

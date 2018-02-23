@@ -54,7 +54,7 @@
   checkinTime.addEventListener('change', equateInOutTime);
   checkoutTime.addEventListener('change', equateOutInTime);
 
-  window.synchronizeFields(checkinTime, checkoutTime, ['12', '13', '14'], ['12', '13', '14'], syncValues);
+  // window.synchronizeFields(checkinTime, checkoutTime, ['12', '13', '14'], ['12', '13', '14'], syncValues);
 
   noticeForm.addEventListener('invalid', function (evt) {
     var invalidField = evt.target;
