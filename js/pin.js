@@ -25,8 +25,15 @@
       activePin.classList.remove('map__pin--active');
     }// удаляем этот класс
   };
+  var removePin = function () {
+    var pin = document.querySelectorAll('button.map__pin');
+    for (var i = 0; i < 8; i++) {
+      pin.remove();
+    }
+  };
   window.pin = {
     generate: generatePin,
-    deactivate: removeActiveClass
+    deactivate: removeActiveClass,
+    remove: removePin
   };
 })();

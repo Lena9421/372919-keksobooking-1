@@ -86,7 +86,7 @@
     <h2 class="notice__title">Ваше объявление</h2>
 
     <form class="notice__form notice__form--disabled" method="post" enctype="multipart/form-data" action="https://js.dump.academy/keksobooking" autocomplete="off">
-      <fieldset class="notice__header">
+      <fieldset class="notice__header" disabled>
         <legend>Ваша фотография (для карты)</legend>
         <div class="notice__photo">
           <div class="upload">
@@ -113,8 +113,8 @@
       <fieldset class="form__element" disabled>
         <label for="type">Тип жилья</label>
         <select id="type" name="type">
-          <option value="flat" selected>Квартира</option>
           <option value="bungalo">Лачуга</option>
+          <option value="flat" selected>Квартира</option>
           <option value="house">Дом</option>
           <option value="palace">Дворец</option>
         </select>
@@ -245,11 +245,14 @@
   <button style="left: 200px; top: 400px;" class="map__pin"><img src="img/avatars/user07.png" width="40" height="40" draggable="false"></button>
 </template>
 <script src="js/utils.js"></script>
+<script src="js/synchronize-fields.js"></script>
+<script src="js/backend.js"></script>
 <script src="js/data.js"></script>
 <script src="js/pin.js"></script>
 <script src="js/card.js"></script>
 <script src="js/show-card.js"></script>
 <script src="js/map.js"></script>
 <script src="js/form.js"></script>
+
 </body>
 </html>
