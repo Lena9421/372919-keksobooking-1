@@ -56,12 +56,28 @@
     element.min = elementValue;
   };
   apartmentType.addEventListener('change', function () {
-    window.synchronizeFields(apartmentType, pricePerNight, ['apartment', 'bungalo', 'palace'], [1000, 0, 10000], syncValueWithMin);
+    window.synchronizeFields(apartmentType, pricePerNight, ['flat,'house', 'palace'], [1000, 5000, 10000], syncValueWithMin);
   });
+
+  var onLoad = function (data) {
+    console.log(data);
+  };
+  var onError = function (message) {
+    // document.map.element.insertAdjacentHTML('afterend', '<div id="message">message</div>');
+    console.error(message);
+  };
+  noticeForm.addEventListener('submit', function (evt) {
+    evt.preventDefault();
+    var invalidField = evt.target;
+    invalidField.style.borderColor = 'blue';
+    window.upLoad(new FormData(noticeForm), onLoad, onError);
+  }, true);
+
   noticeForm.addEventListener('invalid', function (evt) {
     var invalidField = evt.target;
     invalidField.style.borderColor = 'red';
   }, true);
+
   window.form = {
     activate: activateForm,
     addressField: addressField
