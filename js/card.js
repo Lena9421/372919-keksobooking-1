@@ -16,28 +16,7 @@
     liFragment.appendChild(newElement);
     return liFragment;
   };
-  var removeCard = function () {
-    var card = map.querySelector('article.map__card');
-    if (card) {
-      map.removeChild(card);
-    }
-  };
-  var onCloseClick = function () {
-    removeCard();
-    window.pin.deactivate();
-  };
-  var onCloseEnter = function (evt) {
-    if (evt.keyCode === 13) {
-      removeCard();
-      window.pin.deactivate();
-    }
-  };
-  var keyDownEscape = function (evt) {
-    if (evt.keyCode === 27) {
-      removeCard();
-      window.pin.deactivate();
-    }
-  };
+
   var getCard = function (offer) {
     var template = document.querySelector('template');
     var mapCard = template.content.querySelector('article.map__card');
@@ -62,6 +41,30 @@
     popUpClose.addEventListener('click', onCloseClick);
     popUpClose.addEventListener('keydown', onCloseEnter);
     return offerCard;
+  };
+
+  var removeCard = function () {
+    var card = map.querySelector('article.map__card');
+    if (card) {
+      map.removeChild(card);
+    }
+  };
+
+  var onCloseClick = function () {
+    removeCard();
+    window.pin.deactivate();
+  };
+  var onCloseEnter = function (evt) {
+    if (evt.keyCode === 13) {
+      removeCard();
+      window.pin.deactivate();
+    }
+  };
+  var keyDownEscape = function (evt) {
+    if (evt.keyCode === 27) {
+      removeCard();
+      window.pin.deactivate();
+    }
   };
   document.addEventListener('keydown', keyDownEscape);
 

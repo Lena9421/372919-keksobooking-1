@@ -39,6 +39,7 @@
     Y_MAX: 500
   };
 
+  var randomArrayLength = window.utils.getRandomInteger(1, OfferInfo.FEATURES.length);
   window.utils.getArrayWithRandomLength(OfferInfo.FEATURES, randomArrayLength);
 
   var avatarAddress = function (numberOfArrayElement) {
@@ -46,9 +47,6 @@
       + ImgProperties.EXTENSION;
   };
 
-  // создадим переменную для хранения результата выполнения функции.
-  // Результат - случайная длинна массива в диапазоне от 1 до длины массива с OfferInfo.features
-  var randomArrayLength = window.utils.getRandomInteger(1, OfferInfo.FEATURES.length);
   var generateOffer = function (i) {
     var locationX = window.utils.getRandomInteger(Location.X_MIN, Location.X_MAX).toFixed();
     var locationY = window.utils.getRandomInteger(Location.Y_MIN, Location.Y_MAX).toFixed();

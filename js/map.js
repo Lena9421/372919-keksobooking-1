@@ -10,6 +10,10 @@
     HEIGHT: 62,
     ARROW_HEIGHT: 18
   };
+  var Y_MIN = 150;
+  var Y_MAX = 500;
+  var X_MIN = 0;
+  var X_MAX = 1200;
   var pinOffset = PinSize.HEIGHT / 2 + PinSize.ARROW_HEIGHT;
   // var getOffersArray = function (arrayLength) {
   //   var offersArray = [];
@@ -25,7 +29,7 @@
     allOffers = response;
     mainPin.addEventListener('mousedown', onMainPinMouseDown);
   };
-  window.backend.download(onLoad, onError);
+  window.backend.getData(onLoad, onError);
 
   var addPinsToMap = function (array) {
     var fragment = document.createDocumentFragment();
@@ -36,10 +40,7 @@
     }
     mapPins.appendChild(fragment);
   };
-  var onMainPinMouseUp = function () {
-    activateMap();
-    window.form.activate();
-  };
+
   var activateMap = function () {
     map.classList.remove('map--faded');
     addPinsToMap(allOffers);
@@ -67,10 +68,7 @@
     map.insertBefore(element, filtersContainer);
   };
 
-  var Y_MIN = 150;
-  var Y_MAX = 500;
-  var X_MIN = 0;
-  var X_MAX = 1200;
+
 
 
   var onMainPinMouseDown = function (evt) {
