@@ -1,12 +1,18 @@
 'use strict';
 (function () {
   var map = document.querySelector('.map');
+  var currentCard;
 
   var offerType = {
     flat: 'Квартира',
     house: 'Дом',
     bungalo: 'Бунгало',
     palace: 'Дворец'
+  };
+
+  var KeyCodes = {
+    ESC: 27,
+    ENTER: 13
   };
 
   var getFeatureElement = function (featureElement) {
@@ -33,20 +39,25 @@
     cardElementP[2].textContent = offer.offer.rooms + ' комнаты для ' + offer.offer.guests + ' гостей';
     cardElementP[3].textContent = 'Заезд после ' + offer.offer.checkin + ', выезд до ' + offer.offer.checkout;
     var featuresList = offer.offer.features;
-    for (var i = 0; i < featuresList.length; i++) {
+    featuresList.forEach(function (i) {
       var element = getFeatureElement(featuresList[i]);
       ulElement.appendChild(element);
-    }
+    });
     cardElementP[4].textContent = offer.offer.description;
     popUpClose.addEventListener('click', onCloseClick);
     popUpClose.addEventListener('keydown', onCloseEnter);
+    currentCard = offerCard;
     return offerCard;
   };
 
+  var showCard = function (offer) {
+    window.card.remove();
+    window.map.insertElement(window.card.get(offer));
+  };
+
   var removeCard = function () {
-    var card = map.querySelector('article.map__card');
-    if (card) {
-      map.removeChild(card);
+    if (currentCard) {
+      map.removeChild(currentCard);
     }
   };
 
@@ -55,13 +66,13 @@
     window.pin.deactivate();
   };
   var onCloseEnter = function (evt) {
-    if (evt.keyCode === 13) {
+    if (evt.keyCode === KeyCodes.ENTER) {
       removeCard();
       window.pin.deactivate();
     }
   };
   var keyDownEscape = function (evt) {
-    if (evt.keyCode === 27) {
+    if (evt.keyCode === KeyCodes.ESC) {
       removeCard();
       window.pin.deactivate();
     }
@@ -69,7 +80,8 @@
   document.addEventListener('keydown', keyDownEscape);
 
   window.card = {
-    remove: removeCard,
-    get: getCard
+    get: getCard,
+    show: showCard,
+    remove: removeCard
   };
 })();

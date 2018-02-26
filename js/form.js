@@ -10,6 +10,8 @@
   var capacity = document.querySelector('#capacity');
   var capacityOptions = capacity.querySelectorAll('option');
   var addressField = document.getElementById('address');
+  var inputs = noticeForm.querySelectorAll('.form__element input');
+
 
   var checkinArray = ['12:00', '13:00', '14:00'];
   var checkoutArray = ['12:00', '13:00', '14:00'];
@@ -45,21 +47,10 @@
   syncRoomAndGuests();
 
 
-  var onLoad = function () {
-    deActivateForm();
+  var onSubmitSuccess = function () {
+    deactivateForm();
     window.map.deactivate();
     window.card.remove();
-  };
-
-  var onError = function (message) {
-    var modal = document.createElement('div');
-    window.map.insertElement(modal);
-    modal.classList.add('modal--show');
-    modal.contentText = message;
-
-    setTimeout(function () {
-      modal.remove();
-    }, 1000);
   };
 
 
@@ -69,7 +60,7 @@
       item.removeAttribute('disabled');
     });
   };
-  var deActivateForm = function () {
+  var deactivateForm = function () {
     noticeForm.classList.add('notice__form--disabled');
     noticeForm.reset();
     formElements.forEach(function (item) {
@@ -90,20 +81,29 @@
   numberOfRooms.addEventListener('change', syncRoomAndGuests);
 
 
+  inputs.forEach(function (input) {
+    input.addEventListener('keyup', inputKeyupHandler);
+  });
+
+  var inputKeyupHandler = function (evt) {
+    if (evt.target.checkValidity()) {
+      evt.target.classList.remove('field-error');
+    }
+  };
+
   noticeForm.addEventListener('invalid', function (evt) {
     var invalidField = evt.target;
-    invalidField.style.border = '2px dashed red';
+    invalidField.classList.add('field-error');
   }, true);
 
   noticeForm.addEventListener('submit', function (evt) {
     evt.preventDefault();
-    window.backend.sendData(new FormData(noticeForm), onLoad, onError);
+    window.backend.sendData(new FormData(noticeForm), onSubmitSuccess, window.backend.onError);
   });
 
 
   window.form = {
     activate: activateForm,
-    setAddress: setAddress,
-    onError: onError
+    setAddress: setAddress
   };
 })();

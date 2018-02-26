@@ -17,7 +17,7 @@
   var onPinClick = function (evt, offer) {
     removeActiveClass();
     evt.currentTarget.classList.add('map__pin--active');
-    window.showCard.show(offer);
+    window.card.show(offer);
   };
 
   var removeActiveClass = function () {
@@ -27,17 +27,11 @@
     }
   };
 
-  var removePin = function () {
-    var pin = document.querySelectorAll('button.map__pin');
-    for (var i = 0; i < 10; i++) {
-      pin.remove();
-    }
-  };
+
 
   window.pin = {
     generate: generatePin,
     deactivate: removeActiveClass,
-    remove: removePin
   };
 
 })();
