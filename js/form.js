@@ -80,16 +80,16 @@
   });
   numberOfRooms.addEventListener('change', syncRoomAndGuests);
 
-
-  inputs.forEach(function (input) {
-    input.addEventListener('keyup', inputKeyupHandler);
-  });
-
-  var inputKeyupHandler = function (evt) {
+  var onInputChange = function (evt) {
     if (evt.target.checkValidity()) {
       evt.target.classList.remove('field-error');
     }
   };
+
+  inputs.forEach(function (input) {
+    input.addEventListener('change', onInputChange);
+  });
+
 
   noticeForm.addEventListener('invalid', function (evt) {
     var invalidField = evt.target;
