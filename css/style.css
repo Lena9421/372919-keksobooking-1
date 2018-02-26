@@ -203,6 +203,18 @@ textarea:focus
     background: url('../img/logo.png') no-repeat center;
 }
 
+
+.modal--show {
+  width: 300px;
+  height: 200px;
+  display: block;
+  position: fixed;
+  left: 0;
+  right: 0;
+  font-size: 18px;
+  text-align: center;
+}
+
 .map
 {
     position: relative;

@@ -1,10 +1,12 @@
 'use strict';
 (function () {
-  // var OFFERS_COUNT = 8;
   var map = document.querySelector('.map');
   var mapPins = map.querySelector('.map__pins');
   var mainPin = map.querySelector('.map__pin--main');
+  var filtersContainer = document.querySelector('.map__filters-container');
   var pins = [];
+  var pageActivated = false;
+  var allOffers;
   var PinSize = {
     WIDTH: 62,
     HEIGHT: 62,
@@ -15,21 +17,13 @@
   var X_MIN = 0;
   var X_MAX = 1200;
   var pinOffset = PinSize.HEIGHT / 2 + PinSize.ARROW_HEIGHT;
-  // var getOffersArray = function (arrayLength) {
-  //   var offersArray = [];
-  //   for (var i = 0; i < arrayLength; i++) {
-  //     offersArray[i] = window.data.generateOffer(i);
-  //   }
-  //   return offersArray;
-  // };
-  var allOffers;
-  var pageActivated = false;
+
 
   var onLoad = function (response) {
     allOffers = response;
     mainPin.addEventListener('mousedown', onMainPinMouseDown);
   };
-  window.backend.getData(onLoad, onError);
+  window.backend.getData(onLoad, window.form.onError);
 
   var addPinsToMap = function (array) {
     var fragment = document.createDocumentFragment();
@@ -40,20 +34,21 @@
     }
     mapPins.appendChild(fragment);
   };
+  var insertElement = function (element) {
+    map.insertBefore(element, filtersContainer);
+  };
+  var resetMainPin = function () {
+    mainPin.style = '';
+    window.form.setAddress(mainPin.offsetLeft, mainPin.offsetTop + pinOffset);
+  };
 
   var activateMap = function () {
     map.classList.remove('map--faded');
     addPinsToMap(allOffers);
   };
 
-
-  var resetMainPin = function () {
-    mainPin.style = '';
-    window.form.setAddress(mainPin.offsetLeft, mainPin.offsetTop + pinOffset);
-  };
-
-
   var deactivateMap = function () {
+    pageActivated = false;
     map.classList.add('map--faded');
     pins.forEach(function (pin) {
       mapPins.removeChild(pin);
@@ -62,17 +57,9 @@
     resetMainPin();
   };
 
-  var filtersContainer = document.querySelector('.map__filters-container');
-
-  var insertElement = function (element) {
-    map.insertBefore(element, filtersContainer);
-  };
-
-
-
-
   var onMainPinMouseDown = function (evt) {
     evt.preventDefault();
+
     var startCoords = {
       x: evt.clientX,
       y: evt.clientY

@@ -37,7 +37,7 @@
 
   var syncRoomAndGuests = function () {
     var capacityValues = roomToGuest[numberOfRooms.value];
-    capacityOptions.forEach(function (item) { // запускаем цикл по массиву capacityOptions(2-й селект)
+    capacityOptions.forEach(function (item) {
       item.disabled = !capacityValues.includes(item.value);
     });
     capacity.value = capacityValues[0];
@@ -52,15 +52,16 @@
   };
 
   var onError = function (message) {
-    window.alert.errorMessage(message);
+    var modal = document.createElement('div');
+    window.map.insertElement(modal);
+    modal.classList.add('modal--show');
+    modal.contentText = message;
+
+    setTimeout(function () {
+      modal.remove();
+    }, 1000);
   };
 
-
-  // 1.5. При успешной отправке формы, страница переходит в изначальное неактивное состояние:
-  // все заполненные поля стираются, +
-  // метки похожих объявлений и карточка активного объявления удаляются,+
-  //   метка адреса возвращается в исходное положение,
-  // значение поля адреса корректируется соответственно положению метки.
 
   var activateForm = function () {
     noticeForm.classList.remove('notice__form--disabled');
