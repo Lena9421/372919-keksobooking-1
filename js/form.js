@@ -78,6 +78,7 @@
   apartmentType.addEventListener('change', function () {
     window.synchronizeFields(apartmentType, pricePerNight, apartmentArray, apartmentPrices, syncValueWithMin);
   });
+
   numberOfRooms.addEventListener('change', syncRoomAndGuests);
 
   var onInputChange = function (evt) {
