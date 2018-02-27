@@ -28,6 +28,7 @@
   };
 
 
+
   window.pin = {
     generate: generatePin,
     deactivate: removeActiveClass,
