@@ -130,7 +130,9 @@ textarea:focus
 {
     white-space: nowrap;
 }
-
+.app__img {
+  padding: 3px;
+}
 .features input[type=checkbox]
 {
     position: absolute;
