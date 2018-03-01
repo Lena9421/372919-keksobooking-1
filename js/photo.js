@@ -46,14 +46,14 @@
   fileInputs[0].name = 'avatar';
   fileInputs[1].name = 'images';
 
-  var activatePhotos = function() {
+  var activatePhotos = function () {
     fileInputs.forEach(function (input) {
       input.accept = '.gif, .jpg, .jpeg, .png';
       input.addEventListener('change', onInputChange);
     });
   };
 
-  var deactivatePhotos = function() {
+  var deactivatePhotos = function () {
     fileInputs.forEach(function (input) {
       input.removeEventListener('change', onInputChange);
       avatarPreview.src = AVATAR_PLACEHOLDER;
@@ -64,5 +64,5 @@
   window.photo = {
     activate: activatePhotos,
     deactivate: deactivatePhotos
-  }
+  };
 })();

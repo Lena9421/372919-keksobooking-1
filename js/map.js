@@ -41,7 +41,7 @@
   var addPinsToMap = function (array) {
     var fragment = document.createDocumentFragment();
 
-    var pinsData = array.slice(0,MAX_PINS_COUNT);
+    var pinsData = array.slice(0, MAX_PINS_COUNT);
 
     pinsData.forEach(function (element) {
       var pin = window.pin.generate(element);

@@ -9,5 +9,5 @@
       clearTimeout(timeoutId);
     }
     timeoutId = window.setTimeout(callback, DEBOUNCE_INTERVAL);
-  }
+  };
 })();

@@ -79,10 +79,10 @@
     window.backend.sendData(new FormData(noticeForm), onSubmitSuccess, window.backend.onError);
   };
 
-  var onResetButtonClick = function() {
+  var onResetButtonClick = function () {
     deactivateForm();
     window.map.deactivate();
-  }
+  };
 
   var activateForm = function () {
     noticeForm.classList.remove('notice__form--disabled');
