@@ -10,76 +10,99 @@
   var capacity = document.querySelector('#capacity');
   var capacityOptions = capacity.querySelectorAll('option');
   var addressField = document.getElementById('address');
+  var inputs = noticeForm.querySelectorAll('.form__element input');
+
+
+  var checkinArray = ['12:00', '13:00', '14:00'];
+  var checkoutArray = ['12:00', '13:00', '14:00'];
+  var apartmentArray = ['bungalo', 'flat', 'house', 'palace'];
+  var apartmentPrices = [0, 1000, 5000, 10000];
+
   var roomToGuest = {
     '1': ['1'],
     '2': ['1', '2'],
     '3': ['1', '2', '3'],
     '100': ['0']
   };
+
+
+  var syncValues = function (element, elementValue) {
+    element.value = elementValue;
+  };
+  var syncValueWithMin = function (element, elementValue) {
+    element.min = elementValue;
+  };
+
+  var setAddress = function (x, y) {
+    addressField.value = x + ', ' + y;
+  };
+
   var syncRoomAndGuests = function () {
     var capacityValues = roomToGuest[numberOfRooms.value];
-    capacityOptions.forEach(function (item) { // запускаем цикл по массиву capacityOptions(2-й селект)
+    capacityOptions.forEach(function (item) {
       item.disabled = !capacityValues.includes(item.value);
     });
     capacity.value = capacityValues[0];
   };
+  syncRoomAndGuests();
+
+
+  var onSubmitSuccess = function () {
+    deactivateForm();
+    window.map.deactivate();
+    window.card.remove();
+  };
+
+
   var activateForm = function () {
     noticeForm.classList.remove('notice__form--disabled');
     formElements.forEach(function (item) {
       item.removeAttribute('disabled');
     });
   };
-  syncRoomAndGuests();
-  numberOfRooms.addEventListener('change', syncRoomAndGuests);
-
-  var syncValues = function (element, elementValue) {
-    element.value = elementValue;
-  };
-  checkinTime.addEventListener('change', function () {
-    window.synchronizeFields(checkinTime, checkoutTime, ['12:00', '13:00', '14:00'], ['12:00', '13:00', '14:00'], syncValues);
-  });
-  checkoutTime.addEventListener('change', function () {
-    window.synchronizeFields(checkoutTime, checkinTime, ['12:00', '13:00', '14:00'], ['12:00', '13:00', '14:00'], syncValues);
-  });
-  var syncValueWithMin = function (element, elementValue) {
-    element.min = elementValue;
-  };
-  apartmentType.addEventListener('change', function () {
-    window.synchronizeFields(apartmentType, pricePerNight, ['bungalo', 'flat', 'house', 'palace'], [0, 1000, 5000, 10000], syncValueWithMin);
-  });
-  var setAddress = function (x, y) {
-    addressField.value = x + ', ' + y;
-  };
-  var onLoad = function () {
-    deActivateForm();
-    window.map.deactivate();
-    window.card.remove();
-  };
-
-  var onError = function (message) {
-    // console.error(message);
-  };
-  noticeForm.addEventListener('invalid', function (evt) {
-    var invalidField = evt.target;
-    invalidField.style.border = '2px dashed red';
-  }, true);
-
-  // 1.5. При успешной отправке формы, страница переходит в изначальное неактивное состояние:
-  // все заполненные поля стираются, +
-  // метки похожих объявлений и карточка активного объявления удаляются,+
-  //   метка адреса возвращается в исходное положение,
-  // значение поля адреса корректируется соответственно положению метки.
-  var deActivateForm = function () {
+  var deactivateForm = function () {
     noticeForm.classList.add('notice__form--disabled');
     noticeForm.reset();
     formElements.forEach(function (item) {
       item.setAttribute('disabled', true);
     });
   };
+
+
+  checkinTime.addEventListener('change', function () {
+    window.synchronizeFields(checkinTime, checkoutTime, checkinArray, checkinArray, syncValues);
+  });
+  checkoutTime.addEventListener('change', function () {
+    window.synchronizeFields(checkoutTime, checkinTime, checkoutArray, checkinArray, syncValues);
+  });
+  apartmentType.addEventListener('change', function () {
+    window.synchronizeFields(apartmentType, pricePerNight, apartmentArray, apartmentPrices, syncValueWithMin);
+  });
+
+  numberOfRooms.addEventListener('change', syncRoomAndGuests);
+
+  var onInputChange = function (evt) {
+    if (evt.target.checkValidity()) {
+      evt.target.classList.remove('field-error');
+    }
+  };
+
+  inputs.forEach(function (input) {
+    input.addEventListener('change', onInputChange);
+  });
+
+
+  noticeForm.addEventListener('invalid', function (evt) {
+    var invalidField = evt.target;
+    invalidField.classList.add('field-error');
+  }, true);
+
   noticeForm.addEventListener('submit', function (evt) {
     evt.preventDefault();
-    window.backend.upload(new FormData(noticeForm), onLoad, onError);
+    window.backend.sendData(new FormData(noticeForm), onSubmitSuccess, window.backend.onError);
   });
+
+
   window.form = {
     activate: activateForm,
     setAddress: setAddress

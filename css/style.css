@@ -119,7 +119,9 @@ textarea:focus
 
     clip-path: inset(100%);
 }
-
+.app__img {
+  padding: 3px;
+}
 .features
 {
     white-space: nowrap;
