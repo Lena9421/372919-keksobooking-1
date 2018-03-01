@@ -2,7 +2,10 @@
 (function () {
   var SERVER_URL = 'https://js.dump.academy/keksobooking';
 
-  var ErrorMessage = {
+  var XHR_TIMEOUT = 10000;
+  var MODAL_TIMEOUT = 5000;
+
+  var ErrorMessages = {
     TIMEOUT: 'Запрос не успел выполниться за ',
     CONNECTION_ERROR: 'Произошла ошибка соединения',
     STATUS: 'Cтатус ответа: '
@@ -28,7 +31,7 @@
       onError(ErrorMessage.TIMEOUT + xhr.timeout + 'мс');
     });
 
-    xhr.timeout = 10000;
+    xhr.timeout = XHR_TIMEOUT;
     return xhr;
   };
 
@@ -54,7 +57,7 @@
 
     setTimeout(function () {
       modal.remove();
-    }, 5000);
+    }, MODAL_TIMEOUT);
   };
 
   window.backend = {

@@ -856,3 +856,7 @@ textarea:focus
 {
     background-position: -10px -10px;
 }
+
+.field-error {
+  border: 2px dashed red !important;
+}
