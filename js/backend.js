@@ -19,16 +19,16 @@
       if (xhr.status === 200) {
         onLoad(xhr.response);
       } else {
-        onError(ErrorMessage.STATUS + xhr.status + ' ' + xhr.statusText);
+        onError(ErrorMessages.STATUS + xhr.status + ' ' + xhr.statusText);
       }
     });
 
     xhr.addEventListener('error', function () {
-      onError(ErrorMessage.CONNECTION_ERROR + xhr.status);
+      onError(ErrorMessages.CONNECTION_ERROR + xhr.status);
     });
 
     xhr.addEventListener('timeout', function () {
-      onError(ErrorMessage.TIMEOUT + xhr.timeout + 'мс');
+      onError(ErrorMessages.TIMEOUT + xhr.timeout + 'мс');
     });
 
     xhr.timeout = XHR_TIMEOUT;

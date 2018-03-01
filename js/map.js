@@ -27,7 +27,7 @@
     y: mainPin.offsetTop
   };
 
-  var pinOffset = PinSize.HEIGHT / 2 + PinSize.ARROW_HEIGHT;
+  var pinOffset = PinSizes.HEIGHT / 2 + PinSizes.ARROW_HEIGHT;
 
   var insertElement = function (element) {
     map.insertBefore(element, filtersContainer);

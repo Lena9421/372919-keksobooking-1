@@ -33,8 +33,8 @@
     var imgListElement = document.createElement('img');
 
     imgListElement.src = photoSrc;
-    imgListElement.width = ImgProp.WIDTH;
-    imgListElement.height = ImgProp.HEIGHT;
+    imgListElement.width = ImgProps.WIDTH;
+    imgListElement.height = ImgProps.HEIGHT;
     imgListElement.classList.add('app__img');
 
     listElement.appendChild(imgListElement);
@@ -52,7 +52,7 @@
 
     offerCard.querySelector('.popup__features').textContent = '';
     offerCard.querySelector('h3').textContent = offer.offer.title;
-    offerCard.querySelector('h4').textContent = offerType[offer.offer.type];
+    offerCard.querySelector('h4').textContent = OfferTypes[offer.offer.type];
     offerCard.querySelector('.popup__price').textContent = offer.offer.price + '\t\u20BD/ночь';
     offerCard.querySelector('small').textContent = offer.offer.address;
 
