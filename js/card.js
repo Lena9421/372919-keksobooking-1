@@ -109,6 +109,7 @@
     }
   };
 
+
   window.card = {
     show: showCard,
     remove: removeCard
